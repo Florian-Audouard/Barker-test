@@ -19,22 +19,17 @@ input.addEventListener("keydown", (event) => {
 	input.value = "";
 });
 async function fetchgetMessage() {
-	fetch("/msgFromServer", {
+	const resp = await fetch("/msgFromServer", {
 		method: "POST",
 		body: listMsg.length,
-	})
-		.then((resp) => {
-			return resp.json();
-		})
-		.then((data) => {
-			if (data === "no") {
-				return;
-			}
-			for (let elem of data) {
-				listMsg.push(elem);
-				addMsg(elem);
-			}
-		});
+	});
+	const data = await resp.json();
+	if (data !== "no") {
+		for (let elem of data) {
+			listMsg.push(elem);
+			addMsg(elem);
+		}
+	}
 	setTimeout(fetchgetMessage, 100);
 }
 setTimeout(fetchgetMessage, 0);
