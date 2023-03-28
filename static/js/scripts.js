@@ -3,9 +3,9 @@ const msg = document.querySelector("#msg");
 const listMsg = [];
 
 function addMsg(text) {
-	const span = document.createElement("span");
-	span.innerText = text;
-	msg.appendChild(span);
+	const div = document.createElement("div");
+	div.innerText = text;
+	msg.appendChild(div);
 }
 
 input.addEventListener("keydown", (event) => {
@@ -36,4 +36,4 @@ function getMessage() {
 			}
 		});
 }
-setInterval(getMessage, 3000);
+setInterval(getMessage, 100);
