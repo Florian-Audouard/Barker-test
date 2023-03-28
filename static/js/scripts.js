@@ -18,7 +18,7 @@ input.addEventListener("keydown", (event) => {
 	});
 	input.value = "";
 });
-function getMessage() {
+async function fetchgetMessage() {
 	fetch("/msgFromServer", {
 		method: "POST",
 		body: listMsg.length,
@@ -35,5 +35,6 @@ function getMessage() {
 				addMsg(elem);
 			}
 		});
+	setTimeout(fetchgetMessage, 100);
 }
-setInterval(getMessage, 100);
+setTimeout(fetchgetMessage, 0);
