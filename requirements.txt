@@ -1,4 +1,1 @@
-psycopg
-psycopg-binary
-python-dotenv
-flask
+flask==2.2.2
