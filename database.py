@@ -43,6 +43,8 @@ def add_message(msg):  # pylint: disable=missing-function-docstring
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
             cur.execute(
-                """INSERT INTO data (un_text) VALUES ('%(msg)s');""", {"msg": msg}
+                "INSERT INTO data (un_text) VALUES (%(msg)s);",
+                {
+                    "msg": str(msg),
+                },
             )
-            return cur.fetchall()
