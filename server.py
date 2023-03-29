@@ -1,12 +1,12 @@
 import os
 from flask import Flask, jsonify, render_template, request
+from database import add_message, get_data
+
 
 os.chdir(os.path.dirname(__file__))
 
 
 app = Flask(__name__)
-
-msg = []
 
 
 @app.route("/")
@@ -18,6 +18,8 @@ def index():  # pylint: disable=missing-function-docstring
 def send_msg():  # pylint: disable=missing-function-docstring
     data = request.get_data()
     number = int(data)
+    msg = get_data()
+    print(msg)
     if number == len(msg):
         return jsonify("no")
     print(msg[number : len(msg)])
@@ -27,7 +29,7 @@ def send_msg():  # pylint: disable=missing-function-docstring
 @app.route("/msgFromHtml", methods=["POST"])
 def receive_msg():  # pylint: disable=missing-function-docstring
     result = request.get_data()
-    msg.append(result.decode("utf-8"))
+    add_message(result.decode("utf-8"))
     return "ok"
 
 
